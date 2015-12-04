@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class StaticPagesControllerTest < ActionController::TestCase
-  
+  include Devise::TestHelpers
 
   test 'index prompts for login when not logged in' do
   	get :index
