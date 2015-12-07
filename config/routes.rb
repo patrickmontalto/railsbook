@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'static_pages#index'
-  resources :friendships
+  resources :friendships, only: [:create, :update, :destroy]
   resources :users
+  get 'requests' => 'friendships#index', as: :requests
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -34,5 +34,13 @@ class User < ActiveRecord::Base
   def accept_friend(friendship)
     friendship.update_attributes(accepted: true)
   end
+
+  def friendship(friend)
+    if friendship = Friendship.where(user_id: self, friend_id: friend).first
+      friendship
+    elsif friendship = Friendship.where(friend_id: self, user_id: friend).first
+      friendship
+    end
+  end
     
 end

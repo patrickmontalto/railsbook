@@ -14,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "displays a profile when logged in" do
     sign_in @user
-    get(:show, {'id' => "2"})
+    get(:show, {'id' => "1"})
     assert_template 'users/show'
   end
 end
