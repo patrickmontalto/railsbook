@@ -2,6 +2,11 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
+  test "User must have a name" do
+    user = User.new(name: " ")
+    assert_not user.valid?
+  end
+
   test 'User should have posts' do
     user = users(:one)
     post = posts(:one)
@@ -30,5 +35,27 @@ class UserTest < ActiveSupport::TestCase
     user = users(:three)
     received_friend = users(:one)
     assert_equal(user.received_friends.first, received_friend)
+  end
+
+  test "User should be able to accept a friend" do
+    user = users(:patrick)
+    friend = users(:three)
+    friendship = user.friendships.build(:friend_id => friend.id)
+    friendship.save
+    friend.accept_friend(friendship)
+    assert_equal(user.mutual_friends.first, friend)
+  end
+
+  test "User should not be able to add a friend multiple times if currently friends" do
+    user = users(:one)
+    friend = users(:patrick)
+    friendship = user.friendships.build(:friend_id => friend.id)
+    assert_not friendship.valid?
+  end
+
+  test "User should not be able to add themselves as a friend" do
+    user = users(:patrick)
+    friendship = user.friendships.build(:friend_id => user.id)
+    assert_not friendship.valid?
   end
 end

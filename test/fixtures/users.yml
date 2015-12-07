@@ -8,6 +8,7 @@ one:
   id: 1
   name: User one
   email: one@google.com
+  encrypted_password: <%= BCrypt::Password.create("password1", cost: 4)%>
 patrick:
   id: 2
   name: Patrick M
