@@ -6,8 +6,8 @@ class UserRequestsTest < ActionDispatch::IntegrationTest
     @other_user = users(:one)
     @friendship = Friendship.where(user_id: @user, friend_id: @other_user).first
     get new_user_session_path
-    post user_session_path, user: { email: 'one@google.com',
-                                    password: 'password1'}
+    post user_session_path, user: { email: 'bob@show.com',
+                                    password: 'password3'}
   end
 
   test "user can view their friend requests" do

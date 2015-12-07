@@ -13,7 +13,9 @@ patrick:
   id: 2
   name: Patrick M
   email: patrick@google.com
+  encrypted_password: <%= BCrypt::Password.create("password2", cost: 4)%>
 three:
   id: 3
   name: Bob
   email: bob@show.com
+  encrypted_password: <%= BCrypt::Password.create("password3", cost: 4)%>
