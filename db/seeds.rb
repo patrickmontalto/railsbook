@@ -14,17 +14,18 @@ User.create!(name: 'Bob',
              email: 'bob@foobar.com',
              password: 'foobarhash')
 
-User.create!(name: 'Jeb',
-             email: 'jeb@hotmail.gov',
+User.create!(name: 'Gob',
+             email: 'gob@hotmail.gov',
              password: 'foobarish')
 
-# Pat should have a forward relationship with Bob. 
+# Pat should have an activeb friendship with Bob. 
 # Since it is accepted, Bob should have a reverse relationship with Pat.
-Request.create!(sender_id: '1',
-                recipient_id: '2',
-                accepted: true)
+Friendship.create!(user_id: '1',
+                   friend_id: '2',
+                   accepted: true)
 
-# Pat should have a forward relationship with Jeb.
-# Jeb sould have no relationship with Pat?
-Request.create!(sender_id: '1',
-                recipient_id: '3')
+# Pat should have a forward relationship with Gob.
+# Gob sould have a received friendship with Pat.
+Friendship.create!(user_id: '1',
+                   friend_id: '3',
+                   accepted: false)

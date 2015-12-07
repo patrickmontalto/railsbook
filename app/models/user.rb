@@ -7,25 +7,31 @@ class User < ActiveRecord::Base
   # ActiveRecord relations
   has_many :authored_posts, :class_name => "Post", :foreign_key => "author_id", dependent: :destroy
 
-  has_many :sent_requests, :class_name => "Request", :foreign_key => "sender_id"
-  has_many :received_requests, :class_name => "Request", :foreign_key => "recipient_id"
-  #has_many :active_relationships, :class_name => "Relationship"
-  #has_many :forward_friends, :through => :active_relationships, :source => :friend
-  #has_many :passive_relationships, :class_name => "Relationship", :foreign_key => "friend_id"
-  #has_many :reverse_friends, :through => :passive_relationships, :source => :user
+  # establish the many-to-many relationships:
+  # passive friendships are those in which said user is the requested friend
+  # active_friends are friends a user requested that has accepted (sent)
+  # passive_friends are friends which requested a user which the user has accepted (received)
+  # pending friends are those which a user has sent an invite to, but have not accepted (sent)
+  # a received_friendship is an invitation a user has received, but yet not accepted (received)
+  has_many :friendships
+  has_many :passive_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
 
-  has_many :relationships
-  has_many :friends, :through => :relationships, source: :relationship
-  has_many :friended_by, class_name: "Relationship", :foreign_key => "friend_id"
-  has_many :friended_by_users, :through => :friended_by, source: :user
+  has_many :active_friends, -> { where(friendships: { accepted: true }) }, 
+                            :through => :friendships, :source => :friend
+  has_many :passive_friends, -> {where(friendships: { accepted: true }) },
+                            :through => :passive_friendships, :source => :user
+  has_many :pending_friends, -> {where(friendships: { accepted: false }) },
+                            :through => :friendships, :source => :friend
+  has_many :received_friends, -> { where(friendships: { accepted: false}) },
+                              :through => :passive_friendships, :source => :user
 
   def mutual_friends
-    friended_by.where('user_id in (?)', friend_user_ids)
+    active_friends | passive_friends
   end
 
-  # user.accept_request(request) will update to true and then build the relationship if it doesn't exist
-  def accept_request(request)
-    request.update_attributes(accepted: true)
+  # user.accept_friend(friendship) will update accepted: to true
+  def accept_friend(friendship)
+    friendship.update_attributes(accepted: true)
   end
     
 end

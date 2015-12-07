@@ -12,3 +12,7 @@ patrick:
   id: 2
   name: Patrick M
   email: patrick@google.com
+three:
+  id: 3
+  name: Bob
+  email: bob@show.com
