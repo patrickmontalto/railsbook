@@ -47,5 +47,9 @@ class User < ActiveRecord::Base
   def notification_status
     self.received_friends.any? ? "notifications-unread" : "notifications-read"
   end
+
+  # need to build feed method
+  def feed
+  end
     
 end

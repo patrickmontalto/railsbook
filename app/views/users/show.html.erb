@@ -4,6 +4,16 @@ User Profile: <%= @user.name %>
 	<%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %>
 <% end %>
 
+<% if current_user == @user %>
+	<%= render 'posts/form' %>
+<% end %>
+
+<ul>
+	<% @user.authored_posts.each do |post| %>
+		<li><%= post.content %></li> 
+	<% end %>
+</ul>
+
 <h4>Friends</h4>
 <ul>
 	<% @user.mutual_friends.each do |friend| %>

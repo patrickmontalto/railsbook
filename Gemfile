@@ -47,6 +47,7 @@ end
 
 group :test do
 	gem 'minitest-reporters', '1.0.5'
+  gem 'guard-minitest',     '2.3.1'
 end
 group :production do
   gem 'rails_12factor', '0.0.2'
