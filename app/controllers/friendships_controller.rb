@@ -24,7 +24,7 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = Friendship.where(friend_id: current_user, user_id: params[:id]).first
+    @friendship = Friendship.find(params[:id])
     @friendship.destroy
     flash[:success] = "Successfully unfriended user."
     redirect_to root_url
