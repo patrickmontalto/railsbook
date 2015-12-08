@@ -1,0 +1,54 @@
+<nav class="navbar navbar-static-top navbar-default" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+			<%= link_to "railsbook", root_path, class: "navbar-brand" %>
+		</div>
+		<div class="navbar-collapse collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				<% if user_signed_in? %>
+					<li><%= link_to current_user.name, current_user %></li>
+					<li><%= link_to 'Home', root_path, id: "home-link" %></li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notification-dropdown">
+							<% if current_user.received_friends.any? %>
+								<div class="number-notify"><%= current_user.received_friends.count %></div>
+							<% end %>
+							<b class="glyphicon glyphicon-globe" id="notificationIcon"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<% current_user.received_friends.each do |rec_friend| %>
+								<li class="hz">
+										<%= link_to "#{rec_friend.name}", rec_friend %>
+										<%= link_to "Accept", friendship_path(id: rec_friend), :method => "put", class: "btn btn-success" %>
+										<%= link_to "Remove", friendship_path(id: rec_friend), :method => "delete", class: "btn btn-danger"%>
+									</li>
+									<% unless rec_friend == current_user.received_friends.last %>
+										<li class="divider"></li>
+									<% end %>
+							<% end %>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><%= link_to 'Settings', edit_user_registration_path %></li>
+							<li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+						</ul>
+					</li>
+				<% else %>
+					<li><%= link_to 'Sign Up', new_user_registration_path %></li>
+					<li><%= link_to 'Login', new_user_session_path %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</nav>
+

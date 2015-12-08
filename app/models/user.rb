@@ -42,5 +42,9 @@ class User < ActiveRecord::Base
       friendship
     end
   end
+
+  def notification_status
+    self.received_friends.any? ? "notifications-unread" : "notifications-read"
+  end
     
 end

@@ -8,3 +8,33 @@
 .alert-alert {
 	@extend .alert-warning;
 }
+
+#notifications-read {
+	color: #777;
+}
+
+#notifications-unread {
+	color: #FF9322;
+}
+
+#notificationIcon {
+	font-size: 17px;
+}
+
+#notification-dropdown {
+	padding-top: 16px;
+	padding-bottom: 13px;
+}
+
+.open> ul>li.hz{
+    display: inline-flex !important;
+}
+
+.number-notify {
+	position: absolute;
+	top: 5px;
+	right: 0px;
+	width: 10px;
+	height: 10px;
+	color: #FF0000;
+}
