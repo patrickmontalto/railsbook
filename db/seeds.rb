@@ -29,3 +29,10 @@ Friendship.create!(user_id: '1',
 Friendship.create!(user_id: '1',
                    friend_id: '3',
                    accepted: false)
+
+Post.create!(author_id: '3',
+             content: "I am so funny.")
+Post.create!(author_id: '3',
+             content: "I am the best.")
+Post.create!(author_id: '1',
+             content: "Eating a sandwich.")

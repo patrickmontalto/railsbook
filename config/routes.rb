@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   resources :friendships, only: [:create, :update, :destroy]
   resources :users
+  resources :posts
   get 'requests' => 'friendships#index', as: :requests
 
   # The priority is based upon order of creation: first created -> highest priority.

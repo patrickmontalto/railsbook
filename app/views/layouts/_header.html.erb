@@ -22,18 +22,22 @@
 							<% end %>
 							<b class="glyphicon glyphicon-globe" id="notificationIcon"></b>
 						</a>
-						<ul class="dropdown-menu">
-							<% current_user.received_friends.each do |rec_friend| %>
-								<li class="hz">
-										<%= link_to "#{rec_friend.name}", rec_friend %>
-										<%= link_to "Accept", friendship_path(id: rec_friend), :method => "put", class: "btn btn-success" %>
-										<%= link_to "Remove", friendship_path(current_user.friendship(rec_friend)), :method => "delete", class: "btn btn-danger"%>
-									</li>
-									<% unless rec_friend == current_user.received_friends.last %>
-										<li class="divider"></li>
+							<ul class="dropdown-menu">
+								<% if current_user.received_friends.any? %>
+									<% current_user.received_friends.each do |rec_friend| %>
+										<li class="hz">
+												<%= link_to "#{rec_friend.name}", rec_friend %>
+												<%= link_to "Accept", friendship_path(id: rec_friend), :method => "put", class: "btn btn-success" %>
+												<%= link_to "Remove", friendship_path(current_user.friendship(rec_friend)), :method => "delete", class: "btn btn-danger"%>
+											</li>
+											<% unless rec_friend == current_user.received_friends.last %>
+												<li class="divider"></li>
+											<% end %>
 									<% end %>
-							<% end %>
-						</ul>
+								<% else %>
+									<li><%= link_to "You have no requests!", "#" %></li>
+								<% end %>
+							</ul>
 					</li>
 
 					<li class="dropdown">

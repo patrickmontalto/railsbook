@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :received_friends, -> { where(friendships: { accepted: false}) },
                               :through => :passive_friendships, :source => :user
 
+
   def mutual_friends
     active_friends | passive_friends
   end

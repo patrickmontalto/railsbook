@@ -13,6 +13,14 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(user.authored_posts.first, post)
   end
 
+  test "User should be able to create posts" do
+    user = users(:one)
+    assert_difference 'Post.count', 1 do
+      post = user.authored_posts.build(content: "test")
+      post.save
+    end
+  end
+
   test 'User should have friends' do
     user = users(:one)
     friend = users(:patrick)
