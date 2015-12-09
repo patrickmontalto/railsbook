@@ -24,11 +24,6 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", friendship_path(@friendship), text: 'Unfriend', count: 0
   end
 
-  test 'user can create posts from their profile' do
-    get user_path(@user)
-    
-  end
-
   test 'administrative buttons on user profile as current user' do
     get user_path(@user)
     # should not have button to add self as friend
