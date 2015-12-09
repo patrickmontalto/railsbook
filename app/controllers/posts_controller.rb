@@ -9,8 +9,13 @@ class PostsController < ApplicationController
     if @post.save
       flash[:success] = "Post created!"
       redirect_to root_url
+    elsif request.env['PATH_INFO'] == "/"
+      render 'static_pages/index'
     else
-      render 'new'
+      flash[:danger] = "Content can't be blank."
+      redirect_to user_path(current_user)
+      #@user = User.find(params[:post][:author_id])
+      #render :template => 'users/show'
     end
   end
 
