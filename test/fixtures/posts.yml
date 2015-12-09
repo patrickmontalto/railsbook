@@ -8,7 +8,14 @@ one:
   id: 1
   author_id: 1
   content: This is a post.
+  updated_at: <%= 3.hours.ago %>
 two:
   id: 2
   author_id: 1
   content: This is another post.
+  updated_at: <%= 2.hours.ago %>
+three:
+  id: 3
+  author_id: 2
+  content: "This post is great."
+  updated_at: <%= 3.minutes.ago %>

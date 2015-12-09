@@ -38,3 +38,61 @@
 	height: 10px;
 	color: #FF0000;
 }
+
+/* user-feed and posts */
+.user-feed {
+	@extend .container
+	max-width: 500px;
+}
+
+.author-link {
+  font-weight: bold;
+  font-size: 14px;
+  color: rgb(59, 89, 152);
+  position: absolute;
+  left: 60px;
+  top: 15px;
+}
+
+.time-posted {
+  position: absolute;
+  top: 37px;
+  left: 60px;
+  color: rgb(145, 151, 163);
+  font-size: 12px;
+  }
+.content {
+    padding-top: 0px;
+      }
+.head {
+    position: relative;
+  }
+
+.user-thumbnail {
+    height: 40px;
+    width: 40px;
+  }
+
+.panel > hr {
+  margin-left: 8px;
+  margin-right: 8px;
+  }
+
+.panel {
+  position: relative;
+  }
+
+.post-info {
+  position: absolute;
+  left: 12px;
+  color: rgb(145, 151, 163);
+  font-size: 12px;
+  }
+
+.post-info > div {
+  display: inline-block;
+  margin-right: 5px;
+  }
+ 
+
+

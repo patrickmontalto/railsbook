@@ -47,9 +47,11 @@ class User < ActiveRecord::Base
   def notification_status
     self.received_friends.any? ? "notifications-unread" : "notifications-read"
   end
-
-  # need to build feed method
+  
   def feed
+    friend_ids = [self.id]
+    self.mutual_friends.each {|friend| friend_ids << friend.id }
+    Post.where(:author_id => friend_ids).order('updated_at DESC')
   end
     
 end
