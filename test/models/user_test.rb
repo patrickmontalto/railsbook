@@ -74,4 +74,30 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(user.feed.last, self_post)
     assert_equal(user.feed.first, friend_post)
   end
+
+  test "User should have many likes" do
+    user = users(:one)
+    assert_equal(user.liked_posts.count, 1)
+  end
+
+  test "User should have liked posts" do
+    user = users(:one)
+    post = posts(:one)
+    assert_equal(user.liked_posts.first, post)
+  end
+
+  test "User can like a post" do
+    user = users(:one)
+    post = posts(:three)
+    user.like(post)
+    assert_equal(user.liked_posts.count, 2)
+    assert_equal(post.likes.count, 1)
+  end
+
+  test "User can only like a post once" do
+    user = users(:one)
+    post = posts(:one)
+    user.like(post)
+    assert_equal(user.liked_posts.count, 1)
+  end
 end

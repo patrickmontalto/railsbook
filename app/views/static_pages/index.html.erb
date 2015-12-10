@@ -1,7 +1,9 @@
 <div>
 	Welcome to the App!
 </div>
+
 <%= render 'posts/form' %>
+
 <% current_user.feed.each do |post| %>
 <%= render 'posts/post', :post => post %>
 <% end %>

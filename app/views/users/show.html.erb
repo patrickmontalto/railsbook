@@ -10,7 +10,7 @@ User Profile: <%= @user.name %>
 
 <ul>
 	<% @user.authored_posts.each do |post| %>
-		<li><%= post.content %></li> 
+		<%= render 'posts/post', :post => post %>
 	<% end %>
 </ul>
 

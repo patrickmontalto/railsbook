@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
                             :through => :friendships, :source => :friend
   has_many :received_friends, -> { where(friendships: { accepted: false}) },
                               :through => :passive_friendships, :source => :user
+  has_many :likes
+  has_many :liked_posts, :through => :likes, :source => :post
 
 
   def mutual_friends
@@ -52,6 +54,11 @@ class User < ActiveRecord::Base
     friend_ids = [self.id]
     self.mutual_friends.each {|friend| friend_ids << friend.id }
     Post.where(:author_id => friend_ids).order('updated_at DESC')
+  end
+
+  def like(post)
+    like = self.likes.build(:post => post)
+    like.save
   end
     
 end

@@ -1,10 +1,11 @@
 <div class="user-feed">
-	<div class="panel panel-default">
+	<div class="panel panel-default extended">
 	  
 	  <div class="panel-body head">
 	    <img src="https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/p50x50/1900129_10152208529803896_1607081356_n.jpg?oh=5440437a9cbaa76c1ded11c920c46b72&oe=56DE618C"
 	    class="user-thumbnail">
-	    <a href="#" class="author-link"><%= post.author.name %></a>
+	    <%= link_to post.author.name, post.author, :class => "author-link" %>
+	    
 	    <div class="time-posted"><%= time_ago_in_words(post.updated_at) %></div>
 	  </div>
 	  
@@ -12,10 +13,19 @@
 	    <%= post.content %>
 	  </div>
 	  <div class="post-info">
-	    <div class="like-count">3.6k Likes</div>
+	    <div class="like-count"><%= pluralize(post.likes.count, 'Like') %></div>
 	    <div class="comment-count">23 Comments</div>
 	  </div>
 	  <hr>
-	  
+    <div class="post-commands">
+    	<%= link_to likes_path(:post => post, :location => @location), :method => :post do%>
+				<span class="glyphicon glyphicon-thumbs-up like"></span>
+   			<div class="command-text like-text">Like</div>
+    	<% end %>
+    	<a href="#">
+      	<span class="glyphicon glyphicon-comment comment"></span>
+      	<div class="command-text comment-text">Comment</div>
+    	</a>
+  	</div>
 	</div>
 </div>
