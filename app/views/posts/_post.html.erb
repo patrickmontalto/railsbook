@@ -4,12 +4,12 @@
 	  <div class="panel-body head">
 	    <img src="https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/p50x50/1900129_10152208529803896_1607081356_n.jpg?oh=5440437a9cbaa76c1ded11c920c46b72&oe=56DE618C"
 	    class="user-thumbnail">
-	    <a href="#" class="author-link">The Tonight Show Starring Jimmy Fallon</a>
-	    <div class="time-posted">22 hrs</div>
+	    <a href="#" class="author-link"><%= post.author.name %></a>
+	    <div class="time-posted"><%= time_ago_in_words(post.updated_at) %></div>
 	  </div>
 	  
 	  <div class="panel-body content">
-	    Im a panel!<br>Im a panel!<br>Im a panel!<br>
+	    <%= post.content %>
 	  </div>
 	  <div class="post-info">
 	    <div class="like-count">3.6k Likes</div>

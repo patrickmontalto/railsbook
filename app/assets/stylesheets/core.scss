@@ -41,7 +41,7 @@
 
 /* user-feed and posts */
 .user-feed {
-	@extend .container
+	@extend .container;
 	max-width: 500px;
 }
 
