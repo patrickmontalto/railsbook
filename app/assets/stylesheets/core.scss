@@ -138,3 +138,24 @@
         text-decoration: underline;
             }
 
+
+.panel {
+  border-radius: 0px;
+  }
+  
+.comment-form {
+  display: inline-block;
+    }
+.comments {
+  position: relative;
+  bottom: 21px;
+  background-color: rgb(246, 247, 248);
+  border-radius: 0px;
+  }
+
+.comment-input {
+  border-radius: 0px;
+  max-width: 336px;
+  }
+
+

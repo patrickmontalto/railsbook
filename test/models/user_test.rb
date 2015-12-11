@@ -107,4 +107,15 @@ class UserTest < ActiveSupport::TestCase
     user.unlike(post)
     assert_equal(user.liked_posts.count, 0)
   end
+
+  test "User should have comments" do
+    user = users(:one)
+    assert_equal(user.comments.count, 1)
+  end
+
+  test "User should have commented posts" do
+    user = users(:one)
+    post = posts(:one)
+    assert_equal(user.commented_posts.first, post)
+  end
 end

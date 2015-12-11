@@ -4,6 +4,9 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
+# user 1 is friends with 2
+# user 1 sent a request to user 3
 one:
   user_id: 1
   friend_id: 2

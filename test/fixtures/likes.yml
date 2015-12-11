@@ -4,6 +4,10 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
+# post 1 has two likes
+# user 1 likes post 1
+# user 2 likes post 1
 one:
   post_id: 1
   user_id: 1
