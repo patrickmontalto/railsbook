@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
                               :through => :passive_friendships, :source => :user
   has_many :likes
   has_many :liked_posts, :through => :likes, :source => :post
-
+  has_many :comments, :foreign_key => "author_id"
+  has_many :commented_posts, :through => :comments, :source => :post
 
   def mutual_friends
     active_friends | passive_friends

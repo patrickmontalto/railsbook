@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :posts
   get 'requests' => 'friendships#index', as: :requests
   resources :likes, only: [:create, :destroy]
+  # only allowing comments to be created or deleted
+  resources :comments, only: [:create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
