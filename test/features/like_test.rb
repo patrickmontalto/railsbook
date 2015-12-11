@@ -12,8 +12,7 @@ feature "Like" do
 
   scenario "user unlikes a post from their feed" do
     log_in_user
-    page.all('')
-    #last('.post-commands').click_link('Like')
+    first('#post-1').click_link('Like')
     page.must_have_content("Unliked post!")
   end
 

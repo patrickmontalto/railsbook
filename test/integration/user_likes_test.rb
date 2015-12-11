@@ -12,13 +12,13 @@ class UserLikesTest < ActionDispatch::IntegrationTest
 
   test 'user can like a post from feed' do
     get root_path
-    post = posts(:one)
+    post = posts(:two)
     assert_select "a[href=?]", likes_path(:post => post, :location => "home"), text: "Like"
   end
 
   test 'user can like a post from a profile' do
     get user_path(@user)
-    post = posts(:one)
+    post = posts(:two)
     assert_select "a[href=?]", likes_path(:post => post), text: "Like"
   end
 end

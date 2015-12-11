@@ -100,4 +100,11 @@ class UserTest < ActiveSupport::TestCase
     user.like(post)
     assert_equal(user.liked_posts.count, 1)
   end
+
+  test "User can unlike a post" do
+    user = users(:one)
+    post = posts(:one)
+    user.unlike(post)
+    assert_equal(user.liked_posts.count, 0)
+  end
 end
