@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
 	def index
     @location = "home"
     @post = Post.new
+    @comment = Comment.new
     @users = User.all
 	end
 

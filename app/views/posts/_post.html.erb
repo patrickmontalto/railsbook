@@ -39,14 +39,19 @@
 	<div class="panel panel-default comments">
   <div class="panel-body">
     <div class="comment-box">
-      <img src="https://scontent.xx.fbcdn.net/hprofile-xpf1/v/t1.0-1/p32x32/12376241_10154362743542542_3564387794843871358_n.jpg?oh=0346bb95042e6ad06aba1763ba7eb1fc&amp;oe=571D3F20">
+      
       <div class="comment-form">
-        <form class="form-inline">
-  			<div class="form-group">
-              <textarea class="form-control comment-input" id="exampleTextarea" rows="1" cols="50" placeholder="Write something..."></textarea>
-           </div>
-  		  <button type="submit" class="btn btn-primary comment-submit">Post</button>
-		</form>
+     <%= form_for @comment, :url => {:controller => "comments", :action => "create"}, :html => {:class => 'form-inline'} do |f| %>
+      	<div class="form-group">
+      	<img src="https://scontent.xx.fbcdn.net/hprofile-xpf1/v/t1.0-1/p32x32/12376241_10154362743542542_3564387794843871358_n.jpg?oh=0346bb95042e6ad06aba1763ba7eb1fc&amp;oe=571D3F20">
+      		<%= f.text_area(:content, class: 'form-control comment-input', cols: 50, rows: 1, placeholder: 'Write something...') %>
+      		<%= f.hidden_field :post_id, :value => post.id %>
+      		<%= f.hidden_field :author_id, :value => current_user.id %>
+      		<%= hidden_field_tag(:location, @location) %>
+      		<%= f.submit "Post", class: "btn btn-primary comment-submit" %>
+      	</div>
+      <% end %>
+       
       </div>
     </div>
   </div>
