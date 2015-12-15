@@ -10,18 +10,18 @@
 	  </div>
 	  
 	  <div class="panel-body content">
-	    <%= post.content %>
+	  	<%= h(post.content).gsub(/\n/, '<br/>').html_safe %>
 	  </div>
 	  <div class="post-info">
 	    <div class="like-count"><%= pluralize(post.likes.count, 'Like') %></div>
-	    <div class="comment-count">23 Comments</div>
+	    <div class="comment-count"><%= pluralize(post.comments.count, 'Comment') %></div>
 	  </div>
 	  <hr>
     <div class="post-commands">
     	<% if current_user.like?(post) %>
     		<%= link_to like_path(:id => post, :location => @location), :method => :delete do %>
-    			<span class="glyphicon glyphicon-thumbs-up like"></span>
-   				<div class="command-text like-text">Like</div>
+    			<span class="glyphicon glyphicon-thumbs-up like liked"></span>
+   				<div class="command-text like-text liked">Like</div>
     		<% end %>
     	<% else %>
     		<%= link_to likes_path(:post => post, :location => @location), :method => :post do %>
@@ -38,6 +38,63 @@
 	</div>
 	<div class="panel panel-default comments">
   <div class="panel-body">
+		<% if params[:post] == "#{post.id}" && params[:view_more] == "true" %>
+			<% post.comments.each do |comment| %>
+		  	<div class="panel-body comment-block">
+		  		<%= link_to comment.author do %>
+		    	<img src="https://scontent.xx.fbcdn.net/hprofile-xpt1/v/t1.0-1/p32x32/12226925_10206327926496016_8709785040033328531_n.jpg?oh=20309cc5685a589eb140eb30f049315a&amp;oe=56E74F03" class="author-pic">
+		    	<% end %>
+		      <div class="comment-body">
+		      	<span class="comment-author">
+		      		<%= link_to comment.author.name, comment.author %>
+		      	</span>
+		        <span class="comment-comment-text">
+		        	<%= h(comment.content).gsub(/\n/, '<br/>').html_safe %>
+		        </span>
+		        <div class="comment-actions">
+		          <span class="like-reply">
+								<a href="#">Like</a> · 
+								<a href="#">Reply</a> ·
+							</span>
+							<span class="comment-time">
+								<a href="#"><%= time_ago_in_words(comment.updated_at) %></a>
+							</span>
+						</div>
+		      </div>
+		    </div>
+    	<% end %>
+		<% elsif post.comments.any? %>
+			<%= link_to url_for(:post => post, :view_more => true), :method => :get do %>
+				<div class="view-more">View more comments </div>
+			<% end %>
+			<% post.comments.last(2).each do |comment| %>
+		  	<div class="panel-body comment-block">
+		  		<%= link_to comment.author do %>
+		    	<img src="https://scontent.xx.fbcdn.net/hprofile-xpt1/v/t1.0-1/p32x32/12226925_10206327926496016_8709785040033328531_n.jpg?oh=20309cc5685a589eb140eb30f049315a&amp;oe=56E74F03" class="author-pic">
+		    	<% end %>
+		      <div class="comment-body">
+		      	<span class="comment-author">
+		      		<%= link_to comment.author.name, comment.author %>
+		      	</span>
+		        <span class="comment-comment-text">
+		        	<%= h(comment.content).gsub(/\n/, '<br/>').html_safe %>
+		        </span>
+		        <div class="comment-actions">
+		          <span class="like-reply">
+								<a href="#">Like</a> · 
+								<a href="#">Reply</a> ·
+							</span>
+							<span class="comment-time">
+								<a href="#"><%= time_ago_in_words(comment.updated_at) %></a>
+							</span>
+						</div>
+		      </div>
+		    </div>
+    	<% end %>
+		<% end %>
+			
+		
+  	
     <div class="comment-box">
       
       <div class="comment-form">
