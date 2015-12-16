@@ -45,6 +45,7 @@ body {
 .user-feed {
 	@extend .container;
 	max-width: 500px;
+	margin-left: 0px;
 }
 
 .author-link {

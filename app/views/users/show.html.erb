@@ -1,28 +1,42 @@
+<div class="row profile-head">
+	<div class="col-md-10 col-md-offset-2 user-info">
+		<%= image_tag(@user.avatar.url(:medium), width:"200", height: "200", class:"user-pic") %>
+  	<div class="user-details">
+      <div class="user-name"><%= @user.name %></div>
+      <span class="bio">
+      </span>
+   	</div>
+	</div>
+</div>
 
-User Profile: <%= @user.name %>
-<%= image_tag(@user.avatar.url(:medium)) %>
+
 <% unless current_user == @user %>
 	<%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %>
 <% end %>
 
-<div class="user-feed">
-	<% if current_user == @user %>
-		<%= render 'posts/form' %>
-	<% end %>
-	<% @user.authored_posts.each do |post| %>
-		<%= render 'posts/post', :post => post %>
-	<% end %>
+<div class="row">
+	<div class="col-md-2 col-md-offset-2 friends-col">
+		<div class="friend-header">Friends (<%= @user.mutual_friends.count %>)</div>
+    <div class="friends">
+    <% @user.mutual_friends.first(5).each do |friend| %>
+      <div class="friend">
+        <%= image_tag(friend.avatar.url(:thumb), width: "50", height: "50", class: "friend-pic") %>
+        <div class="friend-name"><%= friend.name %></div>
+	      </div>
+      <% end %>
+      <% if @user.mutual_friends.count > 5 %>
+	      <a href="#">View More</a>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-6">
+		<div class="user-feed">
+			<% if current_user == @user %>
+				<%= render 'posts/form' %>
+			<% end %>
+			<% @user.authored_posts.each do |post| %>
+				<%= render 'posts/post', :post => post %>
+			<% end %>
+		</div>
+	</div>
 </div>
-
-<h4>Friends</h4>
-<ul>
-	<% @user.mutual_friends.each do |friend| %>
-		<li>
-				<%= friend.name %>, <%= friend.email %> 
-				<% if current_user == @user %>
-					| <%= link_to "Unfriend", friendship_path(:id => @user.friendship(friend)), :method => :delete, 
-								data: { confirm: "You sure?" } %>
-				<% end %>
-		</li>
-	<% end %>
-</ul>

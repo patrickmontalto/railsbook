@@ -1,3 +1,38 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.user-info {
+  padding-bottom: 50px;
+ }
+.user-pic {
+	display: inline-block;
+	position: relative;
+
+ }
+.user-details {
+	display: inline-block;
+	position: relative;
+}
+.user-name {
+	position: relative;
+	top: -20px;
+  font-size: 28px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.friend-header {
+  font-size: 18px;
+  font-weight: bold;
+  }
+.friend {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.friend-name {
+	position: relative;
+	top: -8px;
+	color: #3B5998;
+	font-size: 12px;
+	font-weight: bold;
+	display: inline-block;
+}

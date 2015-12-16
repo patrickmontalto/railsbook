@@ -1,18 +1,20 @@
-<div>
-	Welcome to the App!
-</div>
+<div class="row">
+	<div class="col-md-2 col-md-offset-2 user-panel">
+		<div class="user-small">
+			<%= link_to current_user do %>
+			<%= image_tag(current_user.avatar.url(:thumb), size: "40x40")%>
+				<span class="user-name-sm"><%= current_user.name %></span>
+			<% end %>
+			<%= link_to "View My Profile", current_user, {:class=>"view-profile"} %>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="user-feed">
+			<%= render 'posts/form' %>
 
-<div class="user-feed">
-	<%= render 'posts/form' %>
-
-	<% current_user.feed.each do |post| %>
-	<%= render 'posts/post', :post => post %>
-	<% end %>
+			<% current_user.feed.each do |post| %>
+			<%= render 'posts/post', :post => post %>
+			<% end %>
+		</div>
+	</div>
 </div>
-<ul>
-	<% @users.each do |user| %>
-		<li>
-			<%= link_to user.name, user_path(user) %>
-		</li>
-	<% end %>
-</ul>
