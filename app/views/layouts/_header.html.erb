@@ -12,7 +12,12 @@
 		<div class="navbar-collapse collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
 				<% if user_signed_in? %>
-					<li><%= link_to current_user.name, current_user %></li>
+					<li>
+					<%= link_to current_user do %>
+						 <span class="usr-img"><%= image_tag(current_user.avatar.url(:thumb), size: "20x20") %>
+						 </span><%= current_user.name %>
+					<% end %>
+					</li>
 					<li><%= link_to 'Home', root_path, id: "home-link" %></li>
 
 					<li class="dropdown">

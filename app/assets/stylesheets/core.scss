@@ -38,7 +38,9 @@
 	height: 10px;
 	color: #FF0000;
 }
-
+body {
+	background-color: rgb(233, 234, 237);
+}
 /* user-feed and posts */
 .user-feed {
 	@extend .container;
@@ -148,6 +150,10 @@
 	border-radius: 0px;
 }
 
+.comment-box {
+	padding-top: 5px;
+}
+
 .comment-form {
 	display: inline-block;
 }
@@ -161,6 +167,7 @@
 .comment-input {
 	border-radius: 0px;
 	max-width: 336px;
+	margin-left: 5px;
 }
 
 .comment-submit {
@@ -172,12 +179,15 @@
 
 .comment-block{
 	position: relative;
+	padding-bottom: 0px;
 }
 
 .author-pic {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	width: 32px;
+	height: 32px;
 }
 .comment-author a {
 	color: rgb(59, 89, 152);
@@ -189,8 +199,8 @@
 .comment-body {
 	position: relative;
 	top: -15px;
-	left: 26px;
-	line-height: 1;
+	left: 28px;
+	line-height: 1
 }
 .comment-content {
 	display: inline-block;

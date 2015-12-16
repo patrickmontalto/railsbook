@@ -1,5 +1,5 @@
 User Profile: <%= @user.name %>
-
+<%= image_tag(@user.avatar.url(:medium)) %>
 <% unless current_user == @user %>
 	<%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %>
 <% end %>

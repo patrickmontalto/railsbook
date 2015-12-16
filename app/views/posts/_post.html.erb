@@ -2,8 +2,7 @@
 	<div class="panel panel-default extended" id="post-<%= post.id %>">
 	  
 	  <div class="panel-body head">
-	    <img src="https://scontent.xx.fbcdn.net/hprofile-xfa1/v/t1.0-1/p50x50/1900129_10152208529803896_1607081356_n.jpg?oh=5440437a9cbaa76c1ded11c920c46b72&oe=56DE618C"
-	    class="user-thumbnail">
+	    <%= image_tag(post.author.avatar.url(:thumb)) %>
 	    <%= link_to post.author.name, post.author, :class => "author-link" %>
 	    
 	    <div class="time-posted"><%= time_ago_in_words(post.updated_at) %></div>
@@ -42,7 +41,8 @@
 			<% post.comments.each do |comment| %>
 		  	<div class="panel-body comment-block">
 		  		<%= link_to comment.author do %>
-		    	<img src="https://scontent.xx.fbcdn.net/hprofile-xpt1/v/t1.0-1/p32x32/12226925_10206327926496016_8709785040033328531_n.jpg?oh=20309cc5685a589eb140eb30f049315a&amp;oe=56E74F03" class="author-pic">
+		  		<%= image_tag(comment.author.avatar.url(:thumb), class: "author-pic") %>
+		    	
 		    	<% end %>
 		      <div class="comment-body">
 		      	<span class="comment-author">
@@ -70,7 +70,7 @@
 			<% post.comments.last(2).each do |comment| %>
 		  	<div class="panel-body comment-block">
 		  		<%= link_to comment.author do %>
-		    	<img src="https://scontent.xx.fbcdn.net/hprofile-xpt1/v/t1.0-1/p32x32/12226925_10206327926496016_8709785040033328531_n.jpg?oh=20309cc5685a589eb140eb30f049315a&amp;oe=56E74F03" class="author-pic">
+		    	<%= image_tag(comment.author.avatar.url(:thumb), class: "author-pic") %>
 		    	<% end %>
 		      <div class="comment-body">
 		      	<span class="comment-author">
@@ -100,7 +100,7 @@
       <div class="comment-form">
      <%= form_for @comment, :url => {:controller => "comments", :action => "create"}, :html => {:class => 'form-inline'} do |f| %>
       	<div class="form-group">
-      	<img src="https://scontent.xx.fbcdn.net/hprofile-xpf1/v/t1.0-1/p32x32/12376241_10154362743542542_3564387794843871358_n.jpg?oh=0346bb95042e6ad06aba1763ba7eb1fc&amp;oe=571D3F20">
+      	<%= image_tag(current_user.avatar.url(:thumb), size: "32x32") %>
       		<%= f.text_area(:content, class: 'form-control comment-input', cols: 50, rows: 1, placeholder: 'Write something...') %>
       		<%= f.hidden_field :post_id, :value => post.id %>
       		<%= f.hidden_field :author_id, :value => current_user.id %>
