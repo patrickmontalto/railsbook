@@ -1,17 +1,23 @@
-<%= form_for @post, :url => {:controller => "posts", :action => "create"}, :html => {:class => 'form-horizontal'} do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<div class="form-group">
-		<div class="col-md-6 col-md-offset-3">
-			<%= f.text_area :content, class: 'form-control', :placeholder => "Write something..." %>
+
+  <div class="panel panel-default">
+    <div class="panel-body create-post">
+      <div class="post-header">
+      	<span class="post-status">
+          <img src="http://i.imgur.com/FR9IOEw.png">
+          <span class="status-select">Status</span>
+        </span>
+        <span class="triangle-select"></span>
+      </div>
+      <%= form_for @post, :url => {:controller => "posts", :action => "create"}, :html => {:class => 'form-horizontal'} do |f| %>
+ 			<%= render 'shared/error_messages', object: f.object %>
+ 			<%= f.text_area :content, class: 'form-control post-input', :placeholder => "Write something..." %>
 			<%= f.hidden_field :author_id, :value => current_user.id %>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-md-12">
-		<center>
-			<%= hidden_field_tag(:location, @location) %>
-			<%= f.submit "Submit", class: "btn btn-success" %>
-		</center>
-		</div>
-	</div>
-<% end %>
+      
+      <div class="post-footer">
+      <%= hidden_field_tag(:location, @location) %>
+			<%= f.submit "Post", class: "btn btn-sm btn-primary post-submit" %>
+			<% end %>
+      </div>
+    </div>
+  </div>
+

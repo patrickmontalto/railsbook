@@ -1,18 +1,18 @@
+
 User Profile: <%= @user.name %>
 <%= image_tag(@user.avatar.url(:medium)) %>
 <% unless current_user == @user %>
 	<%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %>
 <% end %>
 
-<% if current_user == @user %>
-	<%= render 'posts/form' %>
-<% end %>
-
-<ul>
+<div class="user-feed">
+	<% if current_user == @user %>
+		<%= render 'posts/form' %>
+	<% end %>
 	<% @user.authored_posts.each do |post| %>
 		<%= render 'posts/post', :post => post %>
 	<% end %>
-</ul>
+</div>
 
 <h4>Friends</h4>
 <ul>
