@@ -21,8 +21,10 @@
     <% @user.mutual_friends.first(5).each do |friend| %>
       <div class="friend">
         <%= image_tag(friend.avatar.url(:thumb), width: "50", height: "50", class: "friend-pic") %>
+        <%= link_to friend do %>
         <div class="friend-name"><%= friend.name %></div>
 	      </div>
+	      <% end %>
       <% end %>
       <% if @user.mutual_friends.count > 5 %>
 	      <a href="#">View More</a>

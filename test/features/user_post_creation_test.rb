@@ -5,7 +5,7 @@ feature "UserPostCreation" do
     log_in_user
     visit user_path(@user)
     fill_in("post[content]", with: "This is my first test post.")
-    click_button "Submit"
+    first(".post-footer").click_button("Post")
     # currently redirected to home page when posting from profile
     page.current_path.must_equal "/"
     page.must_have_content "Post created!"
@@ -18,7 +18,7 @@ feature "UserPostCreation" do
     log_in_user
     visit user_path(@user)
     fill_in("post[content]", with: " ")
-    click_button "Submit"
+    first(".post-footer").click_button("Post")
     page.wont_have_content "Post created!"
   end
 
@@ -26,7 +26,7 @@ feature "UserPostCreation" do
     log_in_user
     visit root_path
     fill_in("post[content]", with: "This was posted from home!")
-    click_button "Submit"
+    first(".post-footer").click_button("Post")
 
     page.current_path.must_equal "/"
     page.must_have_content "Post created!"
