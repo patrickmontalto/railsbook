@@ -18,7 +18,7 @@ User.create!(name: 'Gob',
              email: 'gob@hotmail.gov',
              password: 'foobarish')
 
-# Pat should have an activeb friendship with Bob. 
+# Pat should have an active friendship with Bob. 
 # Since it is accepted, Bob should have a passive friendship with Pat.
 Friendship.create!(user_id: '1',
                    friend_id: '2',
