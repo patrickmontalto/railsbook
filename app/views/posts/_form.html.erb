@@ -8,7 +8,7 @@
         </span>
         <span class="triangle-select"></span>
       </div>
-      <%= form_for @post, :url => {:controller => "posts", :action => "create"}, :html => {:class => 'form-horizontal'} do |f| %>
+      <%= form_for Post.new, :url => {:controller => "posts", :action => "create"}, :html => {:class => 'form-horizontal'} do |f| %>
  			<%= render 'shared/error_messages', object: f.object %>
  			<%= f.text_area :content, class: 'form-control post-input', :placeholder => "Write something..." %>
 			<%= f.hidden_field :author_id, :value => current_user.id %>

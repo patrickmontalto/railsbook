@@ -53,12 +53,6 @@ class User < ActiveRecord::Base
     self.received_friends.any? ? "notifications-unread" : "notifications-read"
   end
   
-  def feed
-    friend_ids = [self.id]
-    self.mutual_friends.each {|friend| friend_ids << friend.id }
-    Post.where(:author_id => friend_ids).order('updated_at DESC')
-  end
-
   def like(post)
     like = self.likes.build(:post => post)
     like.save
