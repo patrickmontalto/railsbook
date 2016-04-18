@@ -1,0 +1,27 @@
+<%= div_for comment do |comment| %>
+	<div class="comment-admin">
+		<%= comment_admin_commands(comment) %>
+	</div>
+	<div class="panel-body comment-block">
+		<%= link_to comment.author do %>
+		<%= image_tag(comment.author.avatar.url(:thumb), class: "author-pic") %>
+		<% end %>
+	  <div class="comment-body">
+	  	<span class="comment-author">
+	  		<%= link_to comment.author.name, comment.author %>
+	  	</span>
+	    <span class="comment-comment-text">
+	    	<%= h(comment.content).gsub(/\n/, '<br/>').html_safe %>
+	    </span>
+	    <div class="comment-actions">
+	      <span class="like-reply">
+					<a href="#">Like</a> · 
+					<a href="#">Reply</a> ·
+				</span>
+				<span class="comment-time">
+					<a href="#"><%= time_ago_in_words(comment.updated_at) %></a>
+				</span>
+			</div>
+	  </div>
+	</div>
+<% end %>

@@ -1,0 +1,15 @@
+<div class="comment-box">
+  <div class="comment-form">
+ <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, remote: true, :html => {:class => 'form-inline', :id => 'comment-form' } do |f| %>
+  	<div class="form-group">
+  	<%= image_tag(current_user.avatar.url(:thumb), size: "32x32") %>
+  		<%= f.text_area(:content, class: 'form-control comment-input', cols: 50, rows: 1, placeholder: 'Write something...') %>
+  		<%= f.hidden_field :post_id, :value => post.id %>
+  		<%= f.hidden_field :author_id, :value => current_user.id %>
+  		<%= hidden_field_tag(:location, @location) %>
+  		<%= f.submit "Post", class: "btn btn-primary comment-submit" %>
+  	</div>
+  <% end %>
+   
+  </div>
+</div>

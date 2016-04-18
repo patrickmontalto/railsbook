@@ -1,116 +1,12 @@
-	<div class="panel panel-default extended" id="post-<%= post.id %>">
-	  
-	  <div class="panel-body head">
-	    <%= image_tag(post.author.avatar.url(:thumb)) %>
-	    <%= link_to post.author.name, post.author, :class => "author-link" %>
-	    
-	    <div class="time-posted"><%= time_ago_in_words(post.updated_at) %></div>
-	  </div>
-	  
-	  <div class="panel-body content">
-	  	<%= h(post.content).gsub(/\n/, '<br/>').html_safe %>
-	  </div>
-	  <div class="post-info">
-	    <div class="like-count"><%= pluralize(post.likes.count, 'Like') %></div>
-	    <div class="comment-count"><%= pluralize(post.comments.count, 'Comment') %></div>
-	  </div>
-	  <hr>
-    <div class="post-commands">
-    	<% if current_user.like?(post) %>
-    		<%= link_to like_path(:id => post, :location => @location), :method => :delete do %>
-    			<span class="glyphicon glyphicon-thumbs-up like liked"></span>
-   				<div class="command-text like-text liked">Like</div>
-    		<% end %>
-    	<% else %>
-    		<%= link_to likes_path(:post => post, :location => @location), :method => :post do %>
-    			<span class="glyphicon glyphicon-thumbs-up like"></span>
-   				<div class="command-text like-text">Like</div>
-    		<% end %>
-    	<% end %>
-				
-    	<a href="#">
-      	<span class="glyphicon glyphicon-comment comment"></span>
-      	<div class="command-text comment-text">Comment</div>
-    	</a>
-  	</div>
-	</div>
+<%= div_for post do |post| %>
+	<%= render partial:"posts/post_header", locals: {post: post }%>
 	<div class="panel panel-default comments">
-  <div class="panel-body">
-		<% if params[:post] == "#{post.id}" && params[:view_more] == "true" %>
-			<% post.comments.each do |comment| %>
-		  	<div class="panel-body comment-block">
-		  		<%= link_to comment.author do %>
-		  		<%= image_tag(comment.author.avatar.url(:thumb), class: "author-pic") %>
-		    	
-		    	<% end %>
-		      <div class="comment-body">
-		      	<span class="comment-author">
-		      		<%= link_to comment.author.name, comment.author %>
-		      	</span>
-		        <span class="comment-comment-text">
-		        	<%= h(comment.content).gsub(/\n/, '<br/>').html_safe %>
-		        </span>
-		        <div class="comment-actions">
-		          <span class="like-reply">
-								<a href="#">Like</a> · 
-								<a href="#">Reply</a> ·
-							</span>
-							<span class="comment-time">
-								<a href="#"><%= time_ago_in_words(comment.updated_at) %></a>
-							</span>
-						</div>
-		      </div>
-		    </div>
-    	<% end %>
-		<% elsif post.comments.any? %>
-			<%= link_to url_for(:post => post, :view_more => true), :method => :get do %>
-				<div class="view-more">View more comments </div>
-			<% end %>
-			<% post.comments.last(2).each do |comment| %>
-		  	<div class="panel-body comment-block">
-		  		<%= link_to comment.author do %>
-		    	<%= image_tag(comment.author.avatar.url(:thumb), class: "author-pic") %>
-		    	<% end %>
-		      <div class="comment-body">
-		      	<span class="comment-author">
-		      		<%= link_to comment.author.name, comment.author %>
-		      	</span>
-		        <span class="comment-comment-text">
-		        	<%= h(comment.content).gsub(/\n/, '<br/>').html_safe %>
-		        </span>
-		        <div class="comment-actions">
-		          <span class="like-reply">
-								<a href="#">Like</a> · 
-								<a href="#">Reply</a> ·
-							</span>
-							<span class="comment-time">
-								<a href="#"><%= time_ago_in_words(comment.updated_at) %></a>
-							</span>
-						</div>
-		      </div>
-		    </div>
-    	<% end %>
-		<% end %>
-			
-		
-  	
-    <div class="comment-box">
-      
-      <div class="comment-form">
-     <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, :html => {:class => 'form-inline'} do |f| %>
-      	<div class="form-group">
-      	<%= image_tag(current_user.avatar.url(:thumb), size: "32x32") %>
-      		<%= f.text_area(:content, class: 'form-control comment-input', cols: 50, rows: 1, placeholder: 'Write something...') %>
-      		<%= f.hidden_field :post_id, :value => post.id %>
-      		<%= f.hidden_field :author_id, :value => current_user.id %>
-      		<%= hidden_field_tag(:location, @location) %>
-      		<%= f.submit "Post", class: "btn btn-primary comment-submit" %>
-      	</div>
-      <% end %>
-       
-      </div>
-    </div>
-  </div>
-</div>
-  
-
+	  <div class="panel-body">
+	  	<%= view_more(post) %>
+	  	<div class="comments-list">
+				<%= comments_for(post) %>
+			</div>
+	    <%= render partial:"posts/comment_form", locals: { post: post } %>
+	  </div>
+	</div>
+<% end %>

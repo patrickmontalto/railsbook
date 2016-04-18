@@ -10,15 +10,15 @@ class UserLikesTest < ActionDispatch::IntegrationTest
                                     password: 'password1'}
   end
 
-  test 'user can like a post from feed' do
+  test 'user can like a post from timeline' do
     get root_path
     post = posts(:two)
-    assert_select "a[href=?]", likes_path(:post => post, :location => "home"), text: "Like"
+    assert_select "a[href=?]", like_post_path(post), text: "Like"
   end
 
   test 'user can like a post from a profile' do
     get user_path(@user)
     post = posts(:two)
-    assert_select "a[href=?]", likes_path(:post => post), text: "Like"
+    assert_select "a[href=?]", like_post_path(post), text: "Like"
   end
 end

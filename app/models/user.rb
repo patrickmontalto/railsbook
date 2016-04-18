@@ -49,9 +49,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def notification_status
-    self.received_friends.any? ? "notifications-unread" : "notifications-read"
+  def role
+    "user"
   end
+  #def notification_status
+    #self.received_friends.any? ? "notifications-unread" : "notifications-read"
+  #end
   
   def like(post)
     like = self.likes.build(:post => post)

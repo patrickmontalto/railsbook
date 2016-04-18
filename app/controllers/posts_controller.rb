@@ -1,28 +1,21 @@
 class PostsController < ApplicationController
+  before_action :require_login
+  respond_to :html, :js, :json
+
   def new
     @post = Post.new
   end
 
   def create
-    #params[:post][:author_id] = current_user.id
     @post = Post.new(post_params)
-    if @post.save
-      flash[:success] = "Post created!"
-      redirect_to root_url
-    elsif params[:location] == "home"
-      flash[:danger] = "Content can't be blank."
-      redirect_to root_path
-    else
-      flash[:danger] = "Content can't be blank."
-      redirect_to user_path(current_user)
-      #@user = User.find(params[:post][:author_id])
-      #render :template => 'users/show'
-    end
+    @post.save
+    respond_with(@post)
   end
 
-  def index
-    # Need to build feed method
-    @posts = current_user.feed
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    respond_with(@post)
   end
 
   private

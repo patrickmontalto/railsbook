@@ -67,14 +67,6 @@ class UserTest < ActiveSupport::TestCase
     assert_not friendship.valid?
   end
 
-  test "User should have feed of friends and self posts" do
-    user = users(:one)
-    self_post = posts(:one)
-    friend_post = posts(:three)
-    assert_equal(user.feed.last, self_post)
-    assert_equal(user.feed.first, friend_post)
-  end
-
   test "User should have many likes" do
     user = users(:one)
     assert_equal(user.liked_posts.count, 1)

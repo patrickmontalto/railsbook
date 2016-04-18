@@ -36,9 +36,9 @@
 			<% if current_user == @user %>
 				<%= render 'posts/form' %>
 			<% end %>
-			<% @user.authored_posts.each do |post| %>
-				<%= render 'posts/post', :post => post %>
-			<% end %>
+			<div id="posts"%>
+				<%= render @user.authored_posts.order('id DESC') %>
+			</div>
 		</div>
 	</div>
 </div>

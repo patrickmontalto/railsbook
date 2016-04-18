@@ -1,21 +1,18 @@
 class CommentsController < ApplicationController 
+  before_action :require_login
+  respond_to :html, :js, :json
+
   def create
     @comment = Comment.new(comment_params)
-    if @comment.save
-      flash[:success] = "Comment posted!"
-      redirect_to root_url
-    elsif params[:location] == "home"
-      flash[:danger] = "Comment can't be blank."
-      redirect_to root_path
-    else
-      flash[:danger] = "Comment can't be blank."
-      redirect_to user_path(current_user)
-      #@user = User.find(params[:post][:author_id])
-      #render :template => 'users/show'
-    end
+    post = Post.find(params[:comment][:post_id])
+    @comment.save
+    respond_with(@comment)
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    respond_with(@comment)
   end
 
   private

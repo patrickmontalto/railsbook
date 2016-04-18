@@ -1,0 +1,7 @@
+<%= link_to dislike_post_path(post), remote: true, class: 'like-post', :method => :put, 
+		data: { toggle_href: like_post_path(post), id: post.id } do %>
+	<div class="like-commands liked">
+		<span class="glyphicon glyphicon-thumbs-up like"></span>
+		<div class="command-text like-text">Like</div>
+	</div>
+<% end %>

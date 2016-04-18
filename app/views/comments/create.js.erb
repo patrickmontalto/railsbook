@@ -1,0 +1,4 @@
+$('#post_<%= "#{@comment.post_id}" %> > .comments > .panel-body .comments-list ').append("<%= j render partial: 'comment', locals: {comment: @comment} %>");
+$('#comment_<%= "#{@comment.id}" %>').hide().fadeIn('slow');
+$('.comment-count[data-id=<%="#{@comment.post_id}"%>]').text('<%= "#{@comment.post.comments_count}" %>');
+$('#post_<%= "#{@comment.post_id}" %>').find("form")[0].reset();

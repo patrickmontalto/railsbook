@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   root       'dashboard#show'
   resources  :friendships, only: [:create, :update, :destroy]
   resources  :users
-  resources  :posts
+  resources  :posts do
+    member do
+      put "like", to: "likes#create"
+      put "dislike", to: "likes#destroy"
+    end
+  end
   get        'requests' => 'friendships#index', as: :requests
-  resources  :likes, only: [:create, :destroy]
   resources  :comments, only: [:create, :destroy]
 end

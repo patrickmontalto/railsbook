@@ -1,9 +1,10 @@
 class LikesController < ApplicationController
+  respond_to :js, :json, :html
+
   def create
-    @post = Post.find(params[:post])
+    @post = Post.find(params[:id])
     if current_user.like(@post)
-      flash[:success] = "Liked post!"
-      redirect_to :back
+      render json: { count: @post.likes_count, id: params[:id] }
     else
       flash[:danger] = "Unable to like post."
       redirect_to :back
@@ -13,8 +14,7 @@ class LikesController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     if current_user.unlike(@post)
-      flash[:success] = "Unliked post."
-      redirect_to :back
+      render json: { count: @post.likes_count, id: params[:id] }
     else
       flash[:danger] = "Can't unlike post."
       redirect_to :back

@@ -6,7 +6,7 @@ class Timeline
   end
 
   def posts
-    Post.where(author_id: post_user_ids)
+    Post.where(author_id: post_user_ids).order('id DESC')
   end
 
   private

@@ -1,0 +1,10 @@
+<% if @post.valid? %>
+	$("#posts").prepend("<%= j render partial: 'post', locals: {post: @post} %>");
+	$('#post_<%= "#{@post.id}" %>').hide().fadeIn('slow');
+	$('#post-form')[0].reset();
+	$("#error-div").fadeOut("slow");
+<% else %>
+	$("#error-div").hide();
+	$("#error-div").html('<%= j render :partial => 'shared/error_messages', locals: {object: @post} %>');
+	$("#error-div").fadeIn("slow");
+<% end %>
