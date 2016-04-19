@@ -1,0 +1,9 @@
+<div id='friendship_<%= user.friendship(friend).id %>'>
+	<div class="friend">
+  	<%= image_tag(friend.avatar.url(:thumb), width: "50", height: "50", class: "friend-pic") %>
+  	<%= link_to friend do %>
+  		<div class="friend-name"><%= friend.name %></div>
+		<% end %>
+		<%= unfriend_link(user, friend) %>
+	</div>
+</div>

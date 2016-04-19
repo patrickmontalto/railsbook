@@ -41,20 +41,22 @@ class User < ActiveRecord::Base
     friendship.update_attributes(accepted: true)
   end
 
+  # will return the friendship object by passing in the friend object
   def friendship(friend)
-    if friendship = Friendship.where(user_id: self, friend_id: friend).first
-      friendship
-    elsif friendship = Friendship.where(friend_id: self, user_id: friend).first
-      friendship
-    end
+    Friendship.find_by(user_id: self, friend_id: friend) || Friendship.find_by(friend_id: self, user_id: friend)
+  end
+
+  def mutual_friend?(friend)
+    self.mutual_friends.include?(friend)
+  end
+
+  def friend_count
+    self.mutual_friends.count
   end
 
   def role
     "user"
   end
-  #def notification_status
-    #self.received_friends.any? ? "notifications-unread" : "notifications-read"
-  #end
   
   def like(post)
     like = self.likes.build(:post => post)

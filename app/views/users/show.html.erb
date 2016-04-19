@@ -9,23 +9,13 @@
 	</div>
 </div>
 
-
-<% unless current_user == @user %>
-	<%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post %>
-<% end %>
+<%= add_friend_link(@user) %>
 
 <div class="row">
 	<div class="col-md-2 col-md-offset-2 friends-col">
 		<div class="friend-header">Friends (<%= @user.mutual_friends.count %>)</div>
     <div class="friends">
-    <% @user.mutual_friends.first(5).each do |friend| %>
-      <div class="friend">
-        <%= image_tag(friend.avatar.url(:thumb), width: "50", height: "50", class: "friend-pic") %>
-        <%= link_to friend do %>
-        <div class="friend-name"><%= friend.name %></div>
-	      </div>
-	      <% end %>
-      <% end %>
+    	<%= friends_list(@user) %>
       <% if @user.mutual_friends.count > 5 %>
 	      <a href="#">View More</a>
       <% end %>

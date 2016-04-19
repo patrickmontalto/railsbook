@@ -1,8 +1,10 @@
 class FriendshipsController < ApplicationController
   before_action :require_login
+  respond_to :html, :js, :json
   
   def index
   end
+
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
@@ -28,8 +30,7 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = Friendship.find(params[:id])
     @friendship.destroy
-    flash[:success] = "Successfully unfriended user."
-    redirect_to root_url
+    respond_with(@friendship)
   end
 
   private
