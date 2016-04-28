@@ -47,11 +47,15 @@ class User < ActiveRecord::Base
   end
 
   def mutual_friend?(friend)
-    self.mutual_friends.include?(friend)
+    mutual_friends.include?(friend)
   end
 
   def friend_count
-    self.mutual_friends.count
+    mutual_friends.count
+  end
+
+  def received_friends_count
+    received_friends.count if received_friends.any?
   end
 
   def role
@@ -59,17 +63,17 @@ class User < ActiveRecord::Base
   end
   
   def like(post)
-    like = self.likes.build(:post => post)
+    like = likes.build(:post => post)
     like.save
   end
 
   def unlike(post)
-    like = self.likes.find_by(post: post)
+    like = likes.find_by(post: post)
     like.destroy
   end
 
   def like?(post)
-    self.likes.where(post: post).any?
+    likes.where(post: post).any?
   end
     
 end

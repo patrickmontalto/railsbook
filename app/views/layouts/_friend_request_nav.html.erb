@@ -1,0 +1,8 @@
+<li class="hz">
+	<%= link_to "#{rec_friend.name}", rec_friend %>
+	<%= link_to "Accept", friendship_path(id: rec_friend), :method => "put", class: "btn btn-success" %>
+	<%= link_to "Remove", friendship_path(current_user.friendship(rec_friend)), :method => "delete", class: "btn btn-danger"%>
+</li>
+<% unless rec_friend == current_user.received_friends.last %>
+	<li class="divider"></li>
+<% end %>

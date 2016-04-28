@@ -9,27 +9,12 @@
 <li><%= link_to 'Home', root_path, id: "home-link" %></li>
 <li class="dropdown">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notification-dropdown">
-		<% if current_user.received_friends.any? %>
-			<div class="number-notify"><%= current_user.received_friends.count %></div>
-		<% end %>
+		<div class="number-notify"><%= current_user.received_friends_count %></div>
 		<b class="glyphicon glyphicon-globe" id="notificationIcon"></b>
 	</a>
 
 	<ul class="dropdown-menu">
-		<% if current_user.received_friends.any? %>
-			<% current_user.received_friends.each do |rec_friend| %>
-				<li class="hz">
-					<%= link_to "#{rec_friend.name}", rec_friend %>
-					<%= link_to "Accept", friendship_path(id: rec_friend), :method => "put", class: "btn btn-success" %>
-					<%= link_to "Remove", friendship_path(current_user.friendship(rec_friend)), :method => "delete", class: "btn btn-danger"%>
-				</li>
-				<% unless rec_friend == current_user.received_friends.last %>
-					<li class="divider"></li>
-				<% end %>
-			<% end %>
-		<% else %>
-			<li><%= link_to "You have no requests!", "#" %></li>
-		<% end %>
+		<%= friend_request_nav %>
 	</ul>
 </li>
 

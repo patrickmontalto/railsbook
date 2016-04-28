@@ -6,7 +6,6 @@
   		<%= f.text_area(:content, class: 'form-control comment-input', id: "post_#{post.id}_comment",cols: 50, rows: 1, placeholder: 'Write something...') %>
   		<%= f.hidden_field :post_id, :value => post.id %>
   		<%= f.hidden_field :author_id, :value => current_user.id %>
-  		<%= hidden_field_tag(:location, @location) %>
   		<%= f.submit "Post", class: "btn btn-primary comment-submit" %>
   	</div>
   <% end %>
