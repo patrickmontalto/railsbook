@@ -7,10 +7,12 @@
       </span>
       <span class="triangle-select"></span>
     </div>
-    <%= form_for Post.new, :url => {:controller => "posts", :action => "create"}, remote: true, :html => {:class => 'form-horizontal', :id => 'post-form'} do |f| %>
+    <%= form_for Post.new, :url => {:controller => "posts", :action => "create"}, remote: true, multipart: true, authenticity_token: true, :html => {:class => 'form-horizontal', :id => 'post-form' } do |f| %>
 			<%= f.text_area :content, class: 'form-control post-input', :placeholder => "Write something..." %>
 		<%= f.hidden_field :author_id, :value => current_user.id %>
-    
+		<span class="picture">
+			<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+		</span>
     <div class="post-footer">
     <%= hidden_field_tag(:location, @location) %>
 		<%= f.submit "Post", class: "btn btn-sm btn-primary post-submit" %>
@@ -18,3 +20,12 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#post_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
