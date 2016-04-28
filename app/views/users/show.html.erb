@@ -1,7 +1,7 @@
 <div class="row profile-head">
 	<div class="col-md-10 col-md-offset-2 user-info">
 		<div class="profile-overview">
-			<%= image_tag(@user.avatar.url(:medium), width:"200", height: "200", class:"user-pic") %>
+			<%= image_tag(@user.avatar.url, width:"200", height: "200", class:"user-pic") %>
 	  	<div class="user-details">
 	      <div class="user-name">
 	      	<%= @user.name %>

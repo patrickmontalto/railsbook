@@ -3,7 +3,7 @@
 		<div class="user-small">
 				<div class="profile-link-pic">
 				<%= link_to current_user do %>
-					<%= image_tag(current_user.avatar.url(:thumb), size: "40x40")%>
+					<%= image_tag(current_user.avatar.thumb.url, size: "40x40")%>
 				<% end %>
 			</div>
 			<div class="user-overview">

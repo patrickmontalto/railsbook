@@ -1,7 +1,8 @@
 	<div class="panel panel-default extended" id="post-<%= post.id %>">
 	  
 	  <div class="panel-body head">
-	    <%= image_tag(post.author.avatar.url(:thumb)) %>
+	    <%= image_tag(post.author.avatar.thumb.url, size: "40x40")%>
+
 	    <%= link_to post.author.name, post.author, :class => "author-link" %>
 	    <div class="post-admin">
 	     	<%= post_admin_commands(post) %>
