@@ -10,6 +10,9 @@ class FriendshipsController < ApplicationController
     if @friendship.save
       flash[:success] = "Friend requested."
       redirect_to root_url
+    elsif @friendship.errors.full_messages.include? "Friend has already been taken"
+      flash[:info] = "You have already requested that user."
+      redirect_to User.find(params[:friend_id])
     else
       flash[:danger] = "Unable to add friend"
       redirect_to root_url

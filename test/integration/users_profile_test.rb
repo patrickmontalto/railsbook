@@ -18,10 +18,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 
   test 'administrative buttons on user profile as visitor' do
     get user_path(@other_user)
-    # link to add user as a friend
-    assert_select "a[href=?]", friendships_path(:friend_id => @other_user)
-    # should not have ability to remove a user's friends
-    assert_select "a[href=?]", friendship_path(@friendship), text: 'Unfriend', count: 0
+    # link to remove user as a friend
+    assert_select "a[href=?]", friendship_path(@friendship)
   end
 
   test 'administrative buttons on user profile as current user' do
