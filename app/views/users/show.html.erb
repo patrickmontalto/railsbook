@@ -1,19 +1,22 @@
 <div class="row profile-head">
 	<div class="col-md-10 col-md-offset-2 user-info">
-		<%= image_tag(@user.avatar.url(:medium), width:"200", height: "200", class:"user-pic") %>
-  	<div class="user-details">
-      <div class="user-name"><%= @user.name %></div>
-      <span class="bio">
-      </span>
+		<div class="profile-overview">
+			<%= image_tag(@user.avatar.url(:medium), width:"200", height: "200", class:"user-pic") %>
+	  	<div class="user-details">
+	      <div class="user-name">
+	      	<%= @user.name %>
+	      	<div class="friend-command"><%= friend_link(@user) %></div>
+	      </div>
+	      <span class="bio">
+	      </span>
+	   	</div>
    	</div>
 	</div>
 </div>
 
-<%= friend_link(@user) %>
-
 <div class="row">
 	<div class="col-md-2 col-md-offset-2 friends-col">
-		<div class="friend-header">Friends (<%= @user.mutual_friends.count %>)</div>
+		<div class="friend-header">Friends (<%= @user.friend_count%>)</div>
     <div class="friends">
     	<%= friends_list(@user) %>
       <% if @user.mutual_friends.count > 5 %>

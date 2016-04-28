@@ -1,19 +1,21 @@
 <div class="row">
 	<div class="col-md-2 col-md-offset-2 user-panel">
 		<div class="user-small">
-			<%= link_to current_user do %>
-			<%= image_tag(current_user.avatar.url(:thumb), size: "40x40")%>
-				<span class="user-name-sm"><%= current_user.name %></span>
-			<% end %>
-			<%= link_to "View My Profile", current_user, {:class=>"view-profile"} %>
+				<div class="profile-link-pic">
+				<%= link_to current_user do %>
+					<%= image_tag(current_user.avatar.url(:thumb), size: "40x40")%>
+				<% end %>
+			</div>
+			<div class="user-overview">
+				<%= link_to current_user.name, current_user, {:class => "user-name-sm"} %>
+				<%= link_to "View My Profile", current_user, {:class=>"view-profile"} %>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-5">
 		<div class="user-feed">
 			<%= render 'posts/form' %>
-
 			<%= render @dashboard.timeline %>
-			
 		</div>
 	</div>
 </div>

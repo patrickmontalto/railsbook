@@ -41,6 +41,30 @@
 body {
 	background-color: rgb(233, 234, 237);
 }
+
+/* user side bar */
+.user-small {
+	display: inline-block;
+}
+.profile-link-pic {
+	float: left;
+}
+.user-overview {
+	margin-left: 10px;
+	float: right;
+}
+a.user-name-sm {
+	font-size: 14px;
+	font-weight: bold;
+	color: #3b5998;
+}
+
+a.view-profile {
+	font-size: 11px;
+	display: block;
+}
+
+
 /* user-feed and posts */
 .user-feed {
 	@extend .container;
