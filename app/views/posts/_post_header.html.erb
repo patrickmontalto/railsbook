@@ -12,7 +12,7 @@
 	  
 	  <div class="panel-body content">
 	  	<%= h(post.content).gsub(/\n/, '<br/>').html_safe %>
-	  	<%= image_tag post.picture.url if post.picture? %>
+	  	<div class="post-picture"><%= image_tag post.picture.url if post.picture? %></div>
 	  </div>
 	  <div class="post-info">
 	    <div class="like-count" data-id="<%= post.id %>"><%= pluralize(post.likes.count, 'Like') %></div>

@@ -4,6 +4,14 @@
 		$('#post_<%= "#{@post.id}" %>').hide().fadeIn('slow');
 		$('#post-form')[0].reset();
 		$("#error-div").fadeOut("slow");
+
+		$('input:file').change(function() {
+		  var fileName, path;
+		  path = $(this).val();
+		  fileName = path.replace(/^.*\\/, "");
+		  $(".file_name").text(fileName);
+		});
+
   <% else %>
 	  $("#error-div").hide();
 		$("#error-div").html('<%= j render :partial => 'shared/error_messages', locals: {object: @post}  %>');
