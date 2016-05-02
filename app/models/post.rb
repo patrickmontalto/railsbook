@@ -3,8 +3,8 @@ class Post < ActiveRecord::Base
   belongs_to :author, :class_name => "User"
   has_many :likes
   has_many :comments
-  validates :author, presence: true
-  validates :content, presence: true
+  validates :author, presence: true 
+  validates :content, presence: true, :unless => :picture?
   validate :picture_size
   
   def likes_count

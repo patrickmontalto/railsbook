@@ -1,3 +1,15 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bootstrap-filestyle.input-group {
+	display: inline-block;
+}
+
+label.btn.btn-default.status-select {
+	background-color: none;
+}
+
+.file_name {
+	font-size: 11px;
+}

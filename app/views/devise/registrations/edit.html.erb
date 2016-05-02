@@ -7,7 +7,15 @@
 	  <div class="form-group">
 		  <%= f.label :avatar, class: 'col-sm-1 control-label'  %>
 		  <div class="col-sm-6">
-	      <%= f.file_field :avatar %>
+		  	<%= image_tag(@user.avatar.thumb.url) if @user.avatar? %>
+	      <%= f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png' %>
+	      <%= f.hidden_field :avatar_cache %>
+	      <p>
+	      	<label>
+	      		<%= f.check_box :remove_avatar %>
+	      		Remove Avatar
+	      	</label>
+	      </p>
 		  </div>
 	  </div>
   </div>

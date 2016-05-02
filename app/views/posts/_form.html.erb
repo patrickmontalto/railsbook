@@ -1,18 +1,21 @@
 <div class="panel panel-default">
   <div class="panel-body create-post">
     <div class="post-header">
-    	<span class="post-status">
+    <%= form_for Post.new, :url => {:controller => "posts", :action => "create"}, remote: true, multipart: true, authenticity_token: true, :html => {:class => 'form-horizontal', :id => 'post-form' } do |f| %>
+    	<div class="post-status">
         <img src="http://i.imgur.com/FR9IOEw.png"> <!-- compose icon -->
         <span class="status-select">Status</span>
-      </span>
+        <%= image_tag("add_photo_icon.png") %>
+        <form id="post-form">
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', value: "Add Photo" %>
+        <span class="file_name"></span>
+        <%= f.hidden_field :picture_cache %>
+      </div>
       <span class="triangle-select"></span>
     </div>
-    <%= form_for Post.new, :url => {:controller => "posts", :action => "create"}, remote: true, multipart: true, authenticity_token: true, :html => {:class => 'form-horizontal', :id => 'post-form' } do |f| %>
+    
 			<%= f.text_area :content, class: 'form-control post-input', :placeholder => "Write something..." %>
 		<%= f.hidden_field :author_id, :value => current_user.id %>
-		<span class="picture">
-			<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-		</span>
     <div class="post-footer">
     <%= hidden_field_tag(:location, @location) %>
 		<%= f.submit "Post", class: "btn btn-sm btn-primary post-submit" %>

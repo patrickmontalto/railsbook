@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.2.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -18,6 +18,7 @@ gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.8.0'
 gem 'fog',         '1.36.0'
 gem 'remotipart', '~> 1.2'
+gem 'bootstrap-filestyle-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
