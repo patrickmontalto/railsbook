@@ -9,7 +9,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.save
-    respond_with(@post)
+    if remotipart_submitted?
+      render :layout => false, :template => ('posts/create.js.erb'), :status => (@post.errors.any? ? :unprocessable_entity : :ok)
+    else
+      respond_with(@post)
+    end
   end
 
   def destroy

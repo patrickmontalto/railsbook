@@ -17,3 +17,10 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require bootstrap-filestyle
+
+$(document).delegate('form[data-remote]', 'ajax:error', function(e, xhr, status, statusText) {
+  $("#error-div").hide();
+	$("#error-div").html('  <div id=\"error_explanation\">\n    <div class=\"alert alert-danger\">\n      The form contains 1 error.\n    <\/div>\n    <ul>\n      <li>Picture: Wrong file type uploaded<\/li>\n      <\/ul>\n  <\/div>\n');
+	$("#error-div").fadeIn("slow");
+	$(".file_name").text("");
+});
