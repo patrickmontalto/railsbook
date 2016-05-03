@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   # establish the many-to-many relationships:
   # passive friendships are those in which said user is the requested friend
   # active_friends are friends a user requested that has accepted (sent)
-  # passive_friends are friends which requested a user which the user has accepted (received)
+  # passive_friends are friends which requested the user which the user has accepted (accepted friend invite)
   # pending friends are those which a user has sent an invite to, but have not accepted (sent)
   # a received_friendship is an invitation a user has received, but yet not accepted (received)
   has_many :friendships

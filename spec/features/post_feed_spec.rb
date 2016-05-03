@@ -2,11 +2,14 @@ require "rails_helper"
 
 feature "User's dashboard displays posts" do
   scenario "of friends" do
-    log_in_user
+    user = create(:user)
+    friend = create(:user, name: "friend user", email: "friend@example.com")
+    friendship = create(:friendship, friend: friend, user: user, accepted: true)
+    create(:post, author: friend)
+
+    sign_in_as user
     
-    page.must_have_content("User one")
-    page.must_have_content("Patrick M")
-    page.must_have_content("This is a post.")
-    page.must_have_content("This post is great.")
+    expect(page).to have_content("friend user")
+    expect(page).to have_content("This is a post.")
   end
 end
