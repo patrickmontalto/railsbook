@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
 
   private
     def friend_default_user
-      Friendship.create!(user_id: self.id, friend_id: User.first, accepted: true)
+      Friendship.create!(user_id: self.id,friend_id: 1, accepted: true)
     end
     
 end
