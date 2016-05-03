@@ -1,6 +1,12 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include ImageUploadable
-  storage :file
+
+  if Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
+  
   process resize_to_limit: [500, 500]
 
   version :thumb do
