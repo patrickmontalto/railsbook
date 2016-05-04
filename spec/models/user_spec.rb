@@ -54,7 +54,59 @@ describe User do
     @user.accept_friend(friendship)
 
     expect(@user.mutual_friends.count).to eq 1
-
   end
 
+  it "should not be able to add a friend multiple times" do
+    friend = create(:user)
+    @user.friendships.create(friend: friend, accepted: true)
+    friendship_repeated = @user.friendships.build(friend: friend)
+
+    expect(friendship_repeated).to_not be_valid
+  end
+
+  it "should not be able to add themselves as friend" do
+    friendship = @user.friendships.build(friend: @user)
+
+    expect(friendship).to_not be_valid
+  end
+
+  it "has liked posts" do
+    create(:like, user: @user)
+
+    expect(@user.liked_posts.count).to eq 1
+  end
+
+  it "can like a post" do
+    post = create(:post)
+
+    @user.like(post)
+
+    expect(post.likes.count).to eq 1
+  end
+  
+  it "can only like a post once when already liked" do
+    post = create(:post)
+
+    @user.like(post)
+    @user.like(post)
+
+    expect(post.likes.count).to eq 1
+  end
+
+   it "can unlike a post" do
+    post = create(:post)
+    create(:like, post: post, user: @user)
+
+    @user.unlike(post)
+
+    expect(post.likes.count).to eq 0
+   end
+
+   it "has commented posts" do
+    post = create(:post)
+    comment = create(:comment, post: post, author: @user)
+
+    expect(@user.commented_posts.count).to eq 1
+   end
+ 
 end
