@@ -79,9 +79,9 @@ class User < ActiveRecord::Base
 
   private
     def friend_default_user
-      if self.id != 1 {
+      if self.id != 1
         Friendship.create!(user_id: self.id,friend_id: 1, accepted: true)
-      }
+      end
     end
     
 end
