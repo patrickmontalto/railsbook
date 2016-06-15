@@ -1,5 +1,4 @@
 $ ->
-  console.log("hihello")
   readURL = (input) ->
     if input.files and input.files[0]
       reader = new FileReader
