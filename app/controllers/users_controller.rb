@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 	end
 
   def index
-    @users = User.paginate(:page => params[:page])
+    users = User.paginate(:page => params[:page])
+    render "users/_users", locals: {users: users}
   end
 end

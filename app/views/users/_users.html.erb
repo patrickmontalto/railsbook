@@ -1,0 +1,28 @@
+<div class="panel panel-primary users-index">
+  <div class="panel-heading fb-blue">Users</div>
+  <div class="panel-body">
+  	<%= form_for(:search, url: search_path, method: :get) do |f| %>
+			<%= f.text_field :term %>
+			<%= f.submit "Search" %>
+		<% end %>
+  </div>
+  <div class="fill" >
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% users.each do |user| %>
+    	<%= render partial:"users/user", locals: { user: user } %>
+    <% end %>
+    </tbody>
+  </table>
+    <div class="panel-footer">
+      <%= "Page #{users.current_page} of #{users.total_pages}" %><br>
+      <%= will_paginate users%>
+    </div>
+  </div>
+</div>

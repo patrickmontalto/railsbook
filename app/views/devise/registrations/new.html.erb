@@ -30,9 +30,10 @@
   <div class="row">
 	  	<div class="form-group">
 		  	<%= f.label :avatar, class: 'col-sm-1 control-label'  %>
-			  <div class="col-sm-6">
-		      <%= f.file_field :avatar %>
-			  </div>
+		  	<%= f.file_field :avatar, id: "avatar-upload" %><br>
+		  	<img id="img_prev" width=300 height=300 src="#" alt="your image" class="img-thumbnail hidden"/>
+		  	<%= f.
+			  <%= f.hidden_field :avatar_cache %>
 	  	</div>
  	 	</div>
  	 	<br>

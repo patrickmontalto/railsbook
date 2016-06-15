@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root       'dashboard#show'
   resources  :friendships, only: [:create, :update, :destroy]
+  get "/users/search" => "searches#show", :as => "search"
   resources  :users
   resources  :posts do
     member do
