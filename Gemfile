@@ -19,6 +19,7 @@ gem 'mini_magick', '3.8.0'
 gem 'fog',         '1.36.0'
 gem 'remotipart', '~> 1.2'
 gem 'bootstrap-filestyle-rails'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

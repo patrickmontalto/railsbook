@@ -5,4 +5,8 @@ class UsersController < ApplicationController
     @comment = Comment.new
 		@user = User.find(params[:id])
 	end
+
+  def index
+    @users = User.paginate(:page => params[:page])
+  end
 end
