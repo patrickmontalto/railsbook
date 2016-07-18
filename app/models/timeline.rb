@@ -12,6 +12,6 @@ class Timeline
   private
 
     def post_user_ids
-      [@user.id] + @user.mutual_friends.ids
+      [@user.id] + @user.active_friends.ids + @user.passive_friends.ids
     end
 end
